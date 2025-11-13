@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ФИО в инициалы</title>
+    <title>TS Pair Project - Tasks 1 & 2</title>
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -54,21 +54,49 @@
             background-color: #f8d7da;
             border-color: #f5c6cb;
         }
+        .task-section {
+            margin-bottom: 40px;
+            padding: 20px;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+        }
+        h2 {
+            color: #333;
+            border-bottom: 2px solid #007bff;
+            padding-bottom: 10px;
+        }
     </style>
 </head>
 <body>
-    <h1>Преобразование ФИО в инициалы</h1>
+    <h1>TS Pair Project - Tasks</h1>
     
-    <form id="fioForm">
-        <div class="form-group">
-            <label for="fullName">Введите Фамилию Имя Отчество:</label>
-            <input type="text" id="fullName" placeholder="Иванов Иван Иванович" required>
-        </div>
-        
-        <button type="submit">Преобразовать</button>
-    </form>
+    <!-- Task 1: FIO Form -->
+    <div class="task-section">
+        <h2>Task 1: Преобразование ФИО в инициалы</h2>
+        <form id="fioForm">
+            <div class="form-group">
+                <label for="fullName">Введите Фамилию Имя Отчество:</label>
+                <input type="text" id="fullName" placeholder="Иванов Иван Иванович" required>
+            </div>
+            
+            <button type="submit">Преобразовать</button>
+        </form>
+        <output id="result"></output>
+    </div>
 
-    <output id="result"></output>
+    <!-- Task 2: Calculator Form -->
+    <div class="task-section">
+        <h2>Task 2: Калькулятор выражений</h2>
+        <form id="calculatorForm">
+            <div class="form-group">
+                <label for="expressionInput">Введите математическое выражение:</label>
+                <input type="text" id="expressionInput" placeholder="2+3*4 или 1.5*2+3.02" required>
+            </div>
+            
+            <button type="submit">Вычислить</button>
+        </form>
+        <output id="calculatorResult"></output>
+    </div>
 
     <!-- Подключаем скомпилированный TypeScript код -->
     <script type="module" src="dist/index.js"></script>

@@ -1,3 +1,4 @@
+// ==================== TASK 1: FIO to Initials ====================
 // Функция для преобразования ФИО в инициалы с фамилией 
 export function convertFIOToInitials(fullName) {
     // Парсинг и проверка входных данных
@@ -54,13 +55,13 @@ export function parseAndValidateFIO(fullName) {
 function formatNamePart(name) {
     return name.charAt(0).toUpperCase() + name.slice(1).toLowerCase();
 }
-// Функция для обработки формы
-export function setupFormHandler() {
+// Функция для обработки формы ФИО
+export function setupFIOFormHandler() {
     const form = document.getElementById('fioForm');
     const resultOutput = document.getElementById('result');
     const fullNameInput = document.getElementById('fullName');
     if (!form || !resultOutput || !fullNameInput) {
-        console.error('Не найдены необходимые элементы формы');
+        console.error('Не найдены необходимые элементы формы ФИО');
         return;
     }
     form.addEventListener('submit', (event) => {
@@ -85,9 +86,85 @@ export function setupFormHandler() {
         }
     });
 }
+// ==================== TASK 2: Expression Calculator ====================
+export class ExpressionCalculator {
+    constructor(expression) {
+        this.expression = expression;
+    }
+    // Method to clean and validate the expression
+    cleanExpression() {
+        // Remove extra spaces and validate characters
+        let cleaned = this.expression.replace(/\s+/g, '');
+        // Validate: only numbers, +, *, and . are allowed
+        if (!/^[\d+*.]+$/.test(cleaned)) {
+            throw new Error('Invalid characters in expression. Only numbers, +, * and . are allowed');
+        }
+        return cleaned;
+    }
+    // Method to calculate the expression
+    calculate() {
+        const cleanedExpression = this.cleanExpression();
+        // Handle multiplication first (higher precedence)
+        const withMultiplications = this.calculateMultiplications(cleanedExpression);
+        // Then handle additions
+        return this.calculateAdditions(withMultiplications);
+    }
+    calculateMultiplications(expr) {
+        // Replace all multiplication operations with their results
+        return expr.replace(/(\d+(?:\.\d+)?)\*(\d+(?:\.\d+)?)/g, (match, num1, num2) => {
+            return (parseFloat(num1) * parseFloat(num2)).toString();
+        });
+    }
+    calculateAdditions(expr) {
+        // Split by + and sum all numbers
+        const numbers = expr.split('+').map(num => {
+            const parsed = parseFloat(num);
+            if (isNaN(parsed)) {
+                throw new Error('Invalid number format');
+            }
+            return parsed;
+        });
+        return numbers.reduce((sum, current) => sum + current, 0);
+    }
+    // Static method for quick calculation
+    static calculate(expression) {
+        const calculator = new ExpressionCalculator(expression);
+        return calculator.calculate();
+    }
+}
+// Function to handle calculator form
+export function setupCalculatorFormHandler() {
+    const form = document.getElementById('calculatorForm');
+    const resultOutput = document.getElementById('calculatorResult');
+    const expressionInput = document.getElementById('expressionInput');
+    if (!form || !resultOutput || !expressionInput) {
+        console.error('Не найдены необходимые элементы формы калькулятора');
+        return;
+    }
+    form.addEventListener('submit', (event) => {
+        event.preventDefault();
+        const expression = expressionInput.value.trim();
+        try {
+            const calculator = new ExpressionCalculator(expression);
+            const result = calculator.calculate();
+            // Вывод результата
+            resultOutput.textContent = `Result: ${result}`;
+            resultOutput.className = '';
+        }
+        catch (error) {
+            // Вывод ошибки
+            resultOutput.textContent = error instanceof Error ? error.message : 'Произошла ошибка';
+            resultOutput.className = 'error';
+        }
+    });
+}
+// ==================== MAIN INITIALIZATION ====================
 // Инициализация при загрузке страницы
 document.addEventListener('DOMContentLoaded', () => {
-    setupFormHandler();
-    console.log('Форма ФИО инициализирована');
+    setupFIOFormHandler();
+    setupCalculatorFormHandler();
+    console.log('Все формы инициализированы');
 });
+// ==================== EXPORTS FOR TESTING ====================
+export { formatNamePart, ExpressionCalculator as Calculator };
 //# sourceMappingURL=index.js.map

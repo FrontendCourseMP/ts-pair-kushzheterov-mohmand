@@ -3,13 +3,13 @@
     "rootDir": "./src",
     "outDir": "./dist",
 
-    "module": "nodenext",
-    "target": "esnext",
+    "module": "ES6",
+    "target": "ES6",
     "types": [],
 
     "sourceMap": true,
-    "declaration": true,
-    "declarationMap": true,
+    "declaration": false,
+    "declarationMap": false,
 
     "noUncheckedIndexedAccess": true,
     "exactOptionalPropertyTypes": true,
@@ -23,9 +23,10 @@
     
     "noEmitOnError": true,
     
-    "moduleResolution": "nodenext",
+    "moduleResolution": "node",
     "esModuleInterop": true,
     "allowSyntheticDefaultImports": true
   },
-  "include": ["src/**/*"]
+  "include": ["src/**/*"],
+  "exclude": ["node_modules", "dist"]
 }
