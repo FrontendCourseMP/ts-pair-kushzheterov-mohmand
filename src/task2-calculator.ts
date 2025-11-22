@@ -9,7 +9,7 @@ export class ExpressionCalculator {
         let cleaned = this.expression.replace(/\s+/g, '');
         
         if (!/^[\d+*.\s]+$/.test(cleaned)) {
-            throw new Error('Invalid characters in expression');
+            throw new Error('Недопустимые символы в выражении');
         }
         
         return cleaned;

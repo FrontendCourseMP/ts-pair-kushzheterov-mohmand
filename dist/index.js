@@ -97,7 +97,7 @@ export class ExpressionCalculator {
         let cleaned = this.expression.replace(/\s+/g, '');
         // Validate: only numbers, +, *, and . are allowed
         if (!/^[\d+*.]+$/.test(cleaned)) {
-            throw new Error('Invalid characters in expression. Only numbers, +, * and . are allowed');
+            throw new Error('Недопустимые символы в выражении. Допускаются только цифры, +, * и .');
         }
         return cleaned;
     }
@@ -120,7 +120,7 @@ export class ExpressionCalculator {
         const numbers = expr.split('+').map(num => {
             const parsed = parseFloat(num);
             if (isNaN(parsed)) {
-                throw new Error('Invalid number format');
+                throw new Error('Неверный формат числа');
             }
             return parsed;
         });
